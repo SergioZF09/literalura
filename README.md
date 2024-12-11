@@ -78,4 +78,4 @@ En desarrollo.
 
 # Agradecimientos
 
-Agradezco a la Instructora Genesys Rondon de Alura Latam junto con Apple por haber hecho un reto interesante y en donde pude aplicar todo lo aprendido en la formación de Java con Spring.
+Agradezco a la Instructora Genesys Rondon y al Instructor Eric Monné Fraga de Oliveira de Alura Latam junto con Apple por haber hecho un reto interesante y en donde pude aplicar todo lo aprendido en la formación de Java con Spring.

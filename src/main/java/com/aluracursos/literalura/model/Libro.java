@@ -1,27 +1,45 @@
 package com.aluracursos.literalura.model;
 
-import java.util.List;
+import jakarta.persistence.*;
 
+import java.util.OptionalInt;
+
+@Entity
+@Table(name = "libros")
 public class Libro {
 
     //Atributos
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+    @Column(unique = true)
     private String titulo;
-    private List<DatosAutores> autores;
-    private List<String> idiomas;
-    private Double numeroDescargas;
+    @Enumerated(EnumType.STRING)
+    private Idiomas idiomas;
+    private Integer numeroDescargas;
+    @ManyToOne
+    private Autor autor;
 
     //Constructor con atributos
     public Libro() {}
 
     //Constructor con atributos
-    public Libro(String titulo, List<DatosAutores> autores, List<String> idiomas, Double numeroDescargas) {
-        this.titulo = titulo;
-        this.autores = autores;
-        this.idiomas = idiomas;
-        this.numeroDescargas = numeroDescargas;
+    public Libro(DatosLibros datosLibros) {
+        this.titulo = datosLibros.titulo();
+        this.autor = new Autor(datosLibros.autores().get(0));
+        this.idiomas = Idiomas.fromString(datosLibros.idiomas().get(0));
+        this.numeroDescargas = OptionalInt.of(datosLibros.numeroDescargas()).orElse(0);
     }
 
     //Getters y Setters
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
     public String getTitulo() {
         return titulo;
     }
@@ -30,38 +48,37 @@ public class Libro {
         this.titulo = titulo;
     }
 
-    public List<DatosAutores> getAutores() {
-        return autores;
+    public Autor getAutor() {
+        return autor;
     }
 
-    public void setAutores(List<DatosAutores> autores) {
-        this.autores = autores;
+    public void setAutor(Autor autor) {
+        this.autor = autor;
     }
 
-    public List<String> getIdiomas() {
+    public Idiomas getIdiomas() {
         return idiomas;
     }
 
-    public void setIdiomas(List<String> idiomas) {
+    public void setIdiomas(Idiomas idiomas) {
         this.idiomas = idiomas;
     }
 
-    public Double getNumeroDescargas() {
+    public Integer getNumeroDescargas() {
         return numeroDescargas;
     }
 
-    public void setNumeroDescargas(Double numeroDescargas) {
+    public void setNumeroDescargas(Integer numeroDescargas) {
         this.numeroDescargas = numeroDescargas;
     }
 
     //toString
-
     @Override
     public String toString() {
-        return "Título: " + titulo + '\n' +
-                "Autores: " + autores + '\n' +
+        return "\nTítulo: " + titulo + '\n' +
+                "Autores: " + autor.getNombre() + '\n' +
                 "Idiomas: " + idiomas + '\n' +
-                "Número de Descargas: " + numeroDescargas;
+                "Número de Descargas: " + numeroDescargas + "\n";
     }
 
 }

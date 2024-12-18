@@ -1,23 +1,42 @@
 package com.aluracursos.literalura.model;
 
+import jakarta.persistence.*;
+
+import java.util.ArrayList;
+import java.util.List;
+
+@Entity
+@Table(name = "autores")
 public class Autor {
+
     //Atributos
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
     private String nombre;
     private Integer fechaNacimiento;
-    private Integer fechaFallecimiento;
+    private Integer fechaFallecido;
+    @OneToMany(mappedBy = "autor", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    private List<Libro> libros;
 
     //Constructor vacío
     public Autor() {}
 
     //Constructor con atributos
-
-    public Autor(String nombre, Integer fechaNacimiento, Integer fechaFallecimiento) {
-        this.nombre = nombre;
-        this.fechaNacimiento = fechaNacimiento;
-        this.fechaFallecimiento = fechaFallecimiento;
+    public Autor(DatosAutores datosAutores) {
+        this.nombre = datosAutores.nombre();
+        this.fechaNacimiento = datosAutores.fechaNacimiento();
+        this.fechaFallecido = datosAutores.fechaFallecido();
     }
 
     //Getters y Setters
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
 
     public String getNombre() {
         return nombre;
@@ -35,21 +54,29 @@ public class Autor {
         this.fechaNacimiento = fechaNacimiento;
     }
 
-    public Integer getFechaFallecimiento() {
-        return fechaFallecimiento;
+    public Integer getFechaFallecido() {
+        return fechaFallecido;
     }
 
-    public void setFechaFallecimiento(Integer fechaFallecimiento) {
-        this.fechaFallecimiento = fechaFallecimiento;
+    public void setFechaFallecido(Integer fechaFallecido) {
+        this.fechaFallecido = fechaFallecido;
+    }
+
+    public List<Libro> getLibros() {
+        libros = new ArrayList<>();
+        return libros;
+    }
+
+    public void setLibros(List<Libro> libros) {
+        this.libros = libros;
     }
 
     //toString
-
     @Override
     public String toString() {
-        return "Nombre: " + nombre + '\n' +
+        return "\nNombre: " + nombre + '\n' +
                 "Fecha de Nacimiento: " + fechaNacimiento + '\n' +
-                "Fecha de Fallecimiento: " + fechaFallecimiento;
+                "Fecha de Fallecido: " + fechaFallecido  + '\n';
     }
 
 }

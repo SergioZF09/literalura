@@ -34,8 +34,8 @@
 
 # Descripción del proyecto
 
-¡Bienvenido/a al Conversor de Monedas!
-Este proyecto permite convertir un tipo de moneda por otro tipo de moneda, teniendo varios tipos de monedas.
+¡Bienvenido/a a LiterAlura!
+Es una aplicación en consola donde muestra información de los libros y autores que contiene la API Gutendex. En esta aplicación tiene diversas operaciones como: buscar un libro por el título y se registra la información de dicho libro y la información de su autor en la base de datos, listar los libros registrados, listar los autores registrados, listar autores vivos en un determinado año y listar los libros por el idioma.
 
 # Estado del proyecto
 
@@ -45,7 +45,7 @@ Este proyecto permite convertir un tipo de moneda por otro tipo de moneda, tenie
 
 ## Funcionalidades del proyecto
 
-- `Funcionalidad 1`: Tiene una conexión con la API de la página Gutendex para obtener la información de libros, autores y los idiomas de dichos libros.
+- `Funcionalidad 1`: Tiene una conexión con la API de la página Gutendex para obtener la información de libros y autores de dichos libros.
 - `Funcionalidad 2`: Contiene seis opciones para realizar consultas de información de la API, las cuales son:
     - Buscar un libro por título
     - Listar libros registrados
@@ -53,7 +53,9 @@ Este proyecto permite convertir un tipo de moneda por otro tipo de moneda, tenie
     - Listar autores vivos en un determinado año
     - Listar libros por idioma
     - Salir
-- `Funcionalidad 3`: En la primera opción realiza una búsqueda introduciendo el título de un libro y muestra el primer libro encontrado.
+- `Funcionalidad 3`: En la primera opción realiza una búsqueda introduciendo el título de un libro (ya sea todo completo o una parte), muestra la información del primer libro encontrado y se guarda en la base de datos. También se guarda la información del autor de dicho libro buscado.
+- `Funcionalidad 4`: En la segunda opción muestra informaciones (título, autor/es, primer idioma y número de descargas) de todos los libro registrados.
+- `Funcionalidad 5`: En la tercera opción muestra informaciones (nombre, feca de nacimiento y fecha de fallecido) de todos los autores junto con sus libros registrados.
 
 ## Uso del proyecto
 

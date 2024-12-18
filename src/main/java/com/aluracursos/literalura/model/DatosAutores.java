@@ -8,7 +8,7 @@ public record DatosAutores(
 
         @JsonAlias("name") String nombre,
         @JsonAlias("birth_year") Integer fechaNacimiento,
-        @JsonAlias("death_year") Integer fechaFallecimiento
+        @JsonAlias("death_year") Integer fechaFallecido
 
 ) {
 }

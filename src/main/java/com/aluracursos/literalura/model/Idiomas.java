@@ -1,8 +1,18 @@
 package com.aluracursos.literalura.model;
 
 public enum Idiomas {
-    INGLES("en"),
-    ESPANOL("es");
+    //inglés
+    en("en"),
+    //español
+    es("es"),
+    //francés
+    fr("fr"),
+    //húngaro
+    hu("hu"),
+    //finés
+    fi("fi"),
+    //portugués
+    pt("pt");
 
     private String idiomasGutendex;
 

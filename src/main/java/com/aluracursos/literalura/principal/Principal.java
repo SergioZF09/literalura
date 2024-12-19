@@ -5,6 +5,7 @@ import com.aluracursos.literalura.service.AutorService;
 import com.aluracursos.literalura.service.ConsumoAPI;
 import com.aluracursos.literalura.service.ConvierteDatos;
 import com.aluracursos.literalura.service.LibroService;
+import org.springframework.dao.DataIntegrityViolationException;
 
 import java.util.*;
 import java.util.stream.Collectors;
@@ -57,7 +58,7 @@ public class Principal {
                         listarAutoresRegistrados();
                         break;
                     case 4:
-                        //buscarAutoresVivosPorAnio();
+                        buscarAutoresVivosPorAnio();
                         break;
                     case 5:
                         System.out.println("Mensaje 5");
@@ -75,17 +76,18 @@ public class Principal {
         }
     }
 
-    //Metodo para consultar información libros en la API
+    //Metodo para consultar información sobre libros en la API
     private DatosResultados obtenerDatosResultados(String tituloLibro) {
         var json = consumoAPI.obtenerDatos(URL_BASE+"?search="+tituloLibro.replace(" ", "%20"));
         var datos = conversor.obtenerDatos(json, DatosResultados.class);
         return datos;
-    }
+    }//Finaliza método obtenerDatosResultados
 
-    //Metodo para buscar información de un libro por el nombre
+    //Metodo para buscar información de un libro por el título
     private void buscarLibroPorTitulo() {
+
         System.out.print("Escribe el título del libro que deseas buscar: ");
-        var tituloLibro = teclado.nextLine().toLowerCase();
+        var tituloLibro = teclado.nextLine().toUpperCase();
 
         Optional<Libro> libroRegistrado = libroServicio.buscarLibroPorTitulo(tituloLibro);
 
@@ -130,17 +132,23 @@ public class Principal {
 
                 }//Finaliza tercer if
 
-                libroServicio.guardarLibro(libro);
-                System.out.println("\nLibro encontrado.\n");
-                System.out.println(libro+"\n");
-                System.out.println("Libro y autor guardado.\n");
+
+                try {
+                    libroServicio.guardarLibro(libro);
+                    System.out.println("\nLibro encontrado.\n");
+                    System.out.println(libro+"\n");
+                    System.out.println("Libro y autor guardado.\n");
+                } catch (DataIntegrityViolationException e){
+                    System.out.println("El libro ya está registrado.");
+                }
 
             }//Finaliza segundo if
 
         }//Finaliza primer if
 
-    }
+    }//Finaliza método buscar libro por título
 
+    //Metodo para listar los libros registrados
     private void listarLibrosRegistrados() {
 
         List<Libro> libros = libroServicio.listarLibrosRegistrados();
@@ -159,6 +167,7 @@ public class Principal {
 
     }//Finaliza método listar libros registrados
 
+    //Metodo para listar los autores con sus libros registrados
     private void listarAutoresRegistrados() {
 
         List<Autor> autores = autorServicio.listarAutoresRegistrados();
@@ -191,10 +200,43 @@ public class Principal {
 
                 }//Finaliza segundo if
 
-            }//Finaliza bucle
+            }//Finaliza bucle for
 
         }//Finaliza primer if
 
     }//Finaliza método listar autores registrados
+
+    //Metodo para buscar los autores vivos por el año determinado
+    private void buscarAutoresVivosPorAnio() {
+
+        System.out.print("Escribe el año vivo de autor(es) que desea buscar: ");
+        var anioDelAutor = teclado.nextInt();
+
+        List<Autor> buscarAutoresPorAnio = autorServicio.buscarAutoresVivosPorAnio(anioDelAutor);
+
+        for (Autor autoresVivos : buscarAutoresPorAnio) {
+
+            List<Libro> librosAutoresVivosPorId = libroServicio.buscarLibrosPorAutorId(autoresVivos.getId());
+
+            System.out.println("Autor: "+autoresVivos.getNombre());
+            System.out.println("Fecha de Nacimiento: "+autoresVivos.getFechaNacimiento());
+            System.out.println("Fecha de Fallecido: "+autoresVivos.getFechaFallecido());
+
+            if (librosAutoresVivosPorId.isEmpty()) {
+
+                System.out.println("No hay libros registrados para este autor.");
+
+            } else {
+
+                String librosRegistrados = librosAutoresVivosPorId.stream()
+                        .map(Libro::getTitulo)
+                        .collect(Collectors.joining(", "));
+                System.out.println("Libros: ["+librosRegistrados+"]\n");
+
+            }//Finaliza if
+
+        }//Finaliza bucle for
+
+    }//Finaliza método buscar autores vivos por determinado año
 
 }

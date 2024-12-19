@@ -30,4 +30,8 @@ public class AutorService {
     public List<Autor> listarAutoresRegistrados() {
         return autorRepositorio.findAll();
     }
+
+    public List<Autor> buscarAutoresVivosPorAnio(int autorAnio) {
+        return autorRepositorio.buscarAutoresVivosPorAnio(autorAnio);
+    }
 }

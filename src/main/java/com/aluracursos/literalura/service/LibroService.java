@@ -19,7 +19,6 @@ public class LibroService {
     }
 
     public Libro guardarLibro(Libro libro) {
-
         return libroRepositorio.save(libro);
     }
 

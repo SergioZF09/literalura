@@ -1,5 +1,6 @@
 package com.aluracursos.literalura.repository;
 
+import com.aluracursos.literalura.model.Idiomas;
 import com.aluracursos.literalura.model.Libro;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
@@ -11,7 +12,10 @@ public interface LibroRepository extends JpaRepository<Libro, Long> {
     //Buscar el nombre del libro en la base de datos
     Optional<Libro> findByTituloIgnoreCase(String titulo);
 
-    //Busca los libros registrados por el id del autor
+    //Busca los libros por el id del autor
     @Query("SELECT l FROM Libro l WHERE l.autor.id = :autorId")
     List<Libro> buscarLibrosPorAutorId(Long autorId);
+
+    //Busca los libros por idioma
+    List<Libro> findByIdiomas(Idiomas nombreIdioma);
 }

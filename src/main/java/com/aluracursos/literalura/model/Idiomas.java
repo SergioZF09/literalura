@@ -20,6 +20,7 @@ public enum Idiomas {
         this.idiomasGutendex = idiomasGutendex;
     }
 
+    //Metodo para convertir el idioma de tipo Idioma a tipo cadena
     public static Idiomas fromString (String text) {
         for (Idiomas idiomas : Idiomas.values()) {
             if (idiomas.idiomasGutendex.equalsIgnoreCase(text)) {

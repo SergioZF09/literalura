@@ -19,11 +19,6 @@ public class AutorService {
     }
 
     public Autor guardarAutor(Autor autor) {
-
-//        if (autorRepositorio.existsByNombre(autor.getNombre())) {
-//            throw new RuntimeException("El autor ya está registrado");
-//        }
-
         return autorRepositorio.save(autor);
     }
 

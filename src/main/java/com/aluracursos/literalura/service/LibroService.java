@@ -1,5 +1,6 @@
 package com.aluracursos.literalura.service;
 
+import com.aluracursos.literalura.model.Idiomas;
 import com.aluracursos.literalura.model.Libro;
 import com.aluracursos.literalura.repository.LibroRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,4 +31,7 @@ public class LibroService {
         return libroRepositorio.buscarLibrosPorAutorId(id);
     }
 
+    public List<Libro> buscarLibroPorIdiomas(Idiomas nombreIdioma) {
+        return libroRepositorio.findByIdiomas(nombreIdioma);
+    }
 }

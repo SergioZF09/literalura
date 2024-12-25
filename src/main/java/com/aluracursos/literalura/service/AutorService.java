@@ -14,7 +14,7 @@ public class AutorService {
     @Autowired
     private AutorRepository autorRepositorio;
 
-    public Optional<Autor> buscarAutorPorNombre(String nombre) {
+    public Optional<Autor> buscarAutorRegistrado(String nombre) {
         return autorRepositorio.findByNombreIgnoreCase(nombre);
     }
 
@@ -28,5 +28,9 @@ public class AutorService {
 
     public List<Autor> buscarAutoresVivosPorAnio(int autorAnio) {
         return autorRepositorio.buscarAutoresVivosPorAnio(autorAnio);
+    }
+
+    public List<Autor> buscarAutorPorNombre(String nombreAutor) {
+        return autorRepositorio.buscarAutorPorNombre(nombreAutor);
     }
 }

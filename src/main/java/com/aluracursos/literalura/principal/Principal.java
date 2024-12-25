@@ -33,12 +33,15 @@ public class Principal {
                 String menu = """
                 ------------
                 **Catálogo de libros en Literalura**
-                1- Buscar libro por título
-                2- Listar libros registrados
-                3- Listar autores registrados
-                4- Listar autores vivos en un determinado año
-                5- Listar libros por idioma
-                0- Salir
+                1.- Buscar libro por título
+                2.- Listar libros registrados
+                3.- Listar autores registrados
+                4.- Listar autores vivos en un determinado año
+                5.- Listar libros por idioma
+                6.- Estadísticas de libros por número de descargas
+                7.- Top 10 libros más descargados
+                8.- Buscar autor por nombre
+                0.- Salir
                 
                 Elija la opción a través de su número:""";
 
@@ -63,6 +66,15 @@ public class Principal {
                     case 5:
                         listarLibrosPorIdioma();
                         break;
+                    case 6:
+                        estadisticasLibrosPorNumDescargas();
+                        break;
+                    case 7:
+                        top10LibrosMasDescargados();
+                        break;
+                    case 8:
+                        buscarAutorPorNombre();
+                        break;
                     case 0:
                         System.out.println("Cerrando la aplicación...");
                         break;
@@ -70,7 +82,7 @@ public class Principal {
                         System.out.println("Opción inválida. Favor de introducir un número del menú.");
                 }
             } catch (InputMismatchException e) {
-                System.out.println("OOpción inválida. Favor de introducir un número del menú.");
+                System.out.println("Opción inválida. Favor de introducir un número del menú.");
                 teclado.nextLine();
             }
         }
@@ -116,7 +128,7 @@ public class Principal {
                 libro.setIdiomas(idiomas);
 
                 //Busca en la base de datos el autor del libro buscado por su nombre
-                Optional<Autor> autorRegistrado = autorServicio.buscarAutorPorNombre(datosAutores.nombre());
+                Optional<Autor> autorRegistrado = autorServicio.buscarAutorRegistrado(datosAutores.nombre());
 
                 //Verifica si el dicho autor está registrado
                 if (autorRegistrado.isPresent()) {
@@ -138,7 +150,7 @@ public class Principal {
                     libroServicio.guardarLibro(libro);
                     System.out.println("\nLibro encontrado.\n");
                     System.out.println(libro+"\n");
-                    System.out.println("Libro y autor guardado.\n");
+                    System.out.println("Libro guardado.\n");
                 } catch (DataIntegrityViolationException e){
                     //Si el libro está registrado, no se guarda
                     System.out.println("El libro ya está registrado.");
@@ -252,8 +264,7 @@ public class Principal {
                 - en -> Inglés
                 - fr -> Francés
                 - pt -> Portugués
-                """
-        );
+                """);
 
         System.out.print("Escribe el idioma abreviado para buscar los libros: ");
         var nombreIdioma = teclado.nextLine();
@@ -276,5 +287,89 @@ public class Principal {
         }// Finaliza try-catch
 
     }//Finaliza método listar libros por idioma
+
+    //Metodo para listar estadísticas de los libros por número de descargas
+    private void estadisticasLibrosPorNumDescargas() {
+
+        //Obtiene en la base de datos todos los libros registrados
+        List<Libro> todosLosLibros = libroServicio.listarLibrosRegistrados();
+
+        //Verifica si existen libros registrados en la base de datos
+        if (todosLosLibros.isEmpty()){
+            //Si no existen libros registrados, muestra el siguiente mensaje
+            System.out.println("No se encontraron libros registrados.");
+        } else {
+            //Si existen libros, muestra las estadísticas de dichos libros
+            System.out.println("Estadísticas de los libros por número de descargas:\n");
+            IntSummaryStatistics est = todosLosLibros.stream()
+                    .filter(libro -> libro.getNumeroDescargas() > 0)
+                    .collect(Collectors.summarizingInt(Libro::getNumeroDescargas));
+            System.out.println("Cantidad media de descargas: " + est.getAverage());
+            System.out.println("Cantidad máxima de descargas: "+ est.getMax());
+            System.out.println("Cantidad mínima de descargas: " + est.getMin());
+        }//Finaliza if
+
+    }//Finaliza método estadísticas libros por números descargas
+
+    //Metodo para listar top 10 libros más descargados
+    private void top10LibrosMasDescargados() {
+
+        //Busca en la base de datos 10 libros con más descargas
+        List<Libro> top10LibrosMasDescargados = libroServicio.listarTop10LibrosMasDescargados();
+
+        //Verifica si existen dichos libros
+        if (top10LibrosMasDescargados.isEmpty()) {
+            //Si no existen, muestra el siguiente mensaje
+            System.out.println("No se encontraron libros suficientes para mostrar.");
+        } else {
+            //Si existen, los muestra en un forEach
+            System.out.println("Top 10 libros más descargados:\n");
+            top10LibrosMasDescargados.forEach(libro -> System.out.println(libro.toString()));
+        }//Finaliza if
+
+    }//Finaliza método top 10 libros más descargados
+
+    //Metodo para buscar autores por el nombre
+    private void buscarAutorPorNombre() {
+
+        System.out.print("Escribe el nombre del autor que deseas buscar: ");
+        var nombreAutor = teclado.nextLine().toUpperCase();
+
+        //Busca en la base de datos el autor por su nombre
+        List<Autor> autorBuscado = autorServicio.buscarAutorPorNombre(nombreAutor);
+
+        //Verifica si dicho autor está registrado
+        if (autorBuscado.isEmpty()) {
+            //Si no está registrado, muestra el siguiente mensaje
+            System.out.println("No se encontraron autores registrados.");
+        } else {
+            //Si está registrado, muestra la información del autor buscado
+            System.out.println("Autor encontrado:\n");
+            for (Autor autor : autorBuscado) {
+                //Busca en la base de datos los libros del autor por id de dicho autor
+                List<Libro> librosPorAutorId = libroServicio.buscarLibrosPorAutorId(autor.getId());
+
+                //Muestra la información del autor buscado con sus libros
+                System.out.println("----- AUTOR -----");
+                System.out.println("Autor: "+autor.getNombre());
+                System.out.println("Fecha de Nacimiento: "+autor.getFechaNacimiento());
+                System.out.println("Fecha de Fallecido: "+autor.getFechaFallecido());
+
+                //Verifica si existen libros de dicho autor
+                if (librosPorAutorId.isEmpty()) {
+                    //Si no existen libros registrados, muestra el siguiente mensaje
+                    System.out.println("No se encontraron libros registrados para este autor.");
+                } else {
+                    //Si existen libros, muestra los títulos de los libros del autor buscado y juntos como lista
+                    String librosRegistrados = librosPorAutorId.stream()
+                            .map(Libro::getTitulo)
+                            .collect(Collectors.joining(", "));
+                    System.out.println("Libros: ["+librosRegistrados+"]");
+                    System.out.println("-------------------\n");
+                }//Finaliza segundo if
+            }//Finaliza bucle for
+        }//Finaliza primer if
+
+    }//Finaliza método buscar autor por nombre
 
 }

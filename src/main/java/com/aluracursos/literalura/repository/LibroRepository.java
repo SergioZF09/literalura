@@ -9,7 +9,7 @@ import java.util.List;
 import java.util.Optional;
 
 public interface LibroRepository extends JpaRepository<Libro, Long> {
-    //Buscar el nombre del libro en la base de datos
+    //Busca el libro por el nombre
     Optional<Libro> findByTituloIgnoreCase(String titulo);
 
     //Busca los libros por el id del autor
@@ -18,4 +18,8 @@ public interface LibroRepository extends JpaRepository<Libro, Long> {
 
     //Busca los libros por idioma
     List<Libro> findByIdiomas(Idiomas nombreIdioma);
+
+    //Busca los libros y muestra los 10 libros más descargados
+    @Query(value = "SELECT * FROM libros ORDER BY numero_descargas DESC LIMIT 10;", nativeQuery = true)
+    List<Libro> top10LibrosMasDescargados();
 }

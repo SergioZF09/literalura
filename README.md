@@ -30,7 +30,7 @@
 
 - [Teconologías utilizadas](#teconologías-utilizadas)
 
-- [Personas Desarrolladoras del Proyecto](#personas-desarrolladoras-del-proyecto)
+- [Persona Desarrolladora del Proyecto](#persona-desarrolladora-del-proyecto)
 
 # Descripción del proyecto
 

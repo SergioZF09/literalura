@@ -1,7 +1,5 @@
 <h1>:books: Literalura :books:</h1>
 
-
-
 # Insignias
 
 <div align="center">
@@ -68,7 +66,7 @@ Antes de iniciar la aplicacón, es importante primero hacer unas modificaciones 
 
 Se deben modificar las siguientes variables por las variables que tu tengas:
 
-${DB_HOST}, ${DB_NAME}, ${DB_USER} y ${DB_PASSWORD}
+`${DB_HOST}, ${DB_NAME}, ${DB_USER} y ${DB_PASSWORD}`
 
 ![Modificar-base-de-datos](./multimedia/UsarProyecto/ModificarBaseDeDatos.png)
 

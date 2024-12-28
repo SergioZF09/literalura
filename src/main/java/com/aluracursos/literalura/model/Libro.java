@@ -2,7 +2,7 @@ package com.aluracursos.literalura.model;
 
 import jakarta.persistence.*;
 
-import java.util.OptionalInt;
+import java.util.OptionalDouble;
 
 @Entity
 @Table(name = "libros")
@@ -16,7 +16,7 @@ public class Libro {
     private String titulo;
     @Enumerated(EnumType.STRING)
     private Idiomas idiomas;
-    private Integer numeroDescargas;
+    private Double numeroDescargas;
     @ManyToOne
     private Autor autor;
 
@@ -28,7 +28,7 @@ public class Libro {
         this.titulo = datosLibros.titulo();
         this.autor = new Autor(datosLibros.autores().get(0));
         this.idiomas = Idiomas.fromString(datosLibros.idiomas().get(0));
-        this.numeroDescargas = OptionalInt.of(datosLibros.numeroDescargas()).orElse(0);
+        this.numeroDescargas = OptionalDouble.of(datosLibros.numeroDescargas()).orElse(0);
     }
 
     //Getters y Setters
@@ -64,11 +64,11 @@ public class Libro {
         this.idiomas = idiomas;
     }
 
-    public Integer getNumeroDescargas() {
+    public Double getNumeroDescargas() {
         return numeroDescargas;
     }
 
-    public void setNumeroDescargas(Integer numeroDescargas) {
+    public void setNumeroDescargas(Double numeroDescargas) {
         this.numeroDescargas = numeroDescargas;
     }
 
@@ -76,7 +76,7 @@ public class Libro {
     @Override
     public String toString() {
         return "----- LIBRO -----" + '\n' +
-                "\nTítulo: " + titulo + '\n' +
+                "Título: " + titulo + '\n' +
                 "Autores: " + autor.getNombre() + '\n' +
                 "Idiomas: " + idiomas + '\n' +
                 "Número de Descargas: " + numeroDescargas + "\n" +

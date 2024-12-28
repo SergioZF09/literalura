@@ -1,6 +1,6 @@
 <h1>:books: Literalura :books:</h1>
 
-
+![Vídeo-aplicacion-Literalura](./multimedia/UsarProyecto/Literalura.mp4)
 
 # Insignias
 
@@ -64,15 +64,89 @@ Es una aplicación en consola donde muestra información de los libros y autores
 
 ## Uso del proyecto
 
-En desarrollo.
+Antes de iniciar la aplicacón, es importante primero hacer unas modificaciones al archivo application.properties. Esto es para que se conecte la aplicación a la base de datos.
+
+Se deben modificar las siguientes variables por las variables que tu tengas:
+
+${DB_HOST}, ${DB_NAME}, ${DB_USER} y ${DB_PASSWORD}
+
+![Modificar-base-de-datos](./multimedia/UsarProyecto/ModificarBaseDeDatos.png)
+
+La aplicación inicia con un menú donde muestra las opciones que puede realizar el usuario. Para elegir una de las 8 opciones es necesario ingresar su número, en caso contrario, mostrará un mensaje indicando que ingrese un número del menú.
+
+![Menu-de-la-aplicacion](./multimedia/UsarProyecto/Menu.png)
+
+Al ingresar la opción 1 muestra un mensaje indicando "Escribe el título del libro que desea buscar, escribes el título y la aplicación primero busca si está registrado en la base de datos. Si no está, lo busca en la API Gutendex para obtener los datos de dicho libro. Cabe aclarar que sólo obtiene el primer libro encontrado en la API.
+
+Al terminar la búsqueda, muestra un mensaje diciendo "Libro encontrado", luego muestra la información de dicho libro, después muestra otro mensaje diciendo que el libro se guardó, refiriéndose que se guardó en la base de datos junto con la información de su autor.
+
+![Opcion1-buscar-libro](./multimedia/UsarProyecto/Opcion1.png)
+
+Al ingresar la opción 2 muestra un mensaje diciendo "Los libros registrados son los siguientes:" y después enlista todos los libros que están guardados en la base de datos.
+
+![Opcion2-listar-todos-los-libro](./multimedia/UsarProyecto/Opcion2.png)
+
+Al ingresar la opción 3 muestra un mensaje diciendo "Los autores registrados son los siguientes:" y después enlista todos los autores que están guardados en la base de datos. Los datos de dichos autores se guardan a la vez que se guarda la información de los libros.
+
+También, en la información de los autores se muestra sólo los títulos de sus libros.
+
+![Opcion3-listar-todos-los-autores](./multimedia/UsarProyecto/Opcion3.png)
+
+Al ingresar la opción 4 muestra un mensaje indicando "Escribe el año vivo del autor(es) que desea buscar:". Después de haber escrito el año muestra otro mensaje diciendo "El autor o los autores vivos del año (año ingresado) son los siguientes:" y al último enlista todos los autores que estaban vivos con sus respectivos datos. En este caso puede variar dependiendo del año escrito, si sólo aparece un autor o varios autores.
+
+![Opcion4-autores-vivos-por-determinado-año](./multimedia/UsarProyecto/Opcion4.png)
+
+Al ingresar la opción 5 muestra un menú de los idiomas que están disponibles en la aplicación, luego muestra otro mensaje indicando "Escribe el el idioma abreviado para buscar los libros:". Después busca en la base de datos los libros con el idioma escrito y los muestra con sus respectivos datos. Como en la opción 4, también puede variar dependiendo del idioma escrito, si sólo aparece un libro o varios libros.
+
+![Opcion5-listar-libros-por-idioma](./multimedia/UsarProyecto/Opcion5.png)
+
+Al ingresar la opción 6 muestra un mensaje diciendo "Estadísticas de los libros por número de descargas:", y después muestra las cantidades media, máxima y mínima de descargas de los libros guardados en la base de datos.
+
+![Opcion6-estadisticas-libros-por-numero-descargas](./multimedia/UsarProyecto/Opcion6.png)
+
+Al ingresar la opción 7 muestra un mensaje diciendo "Top 10 libros más descargados:", y después muestra los 10 libros que tienen más descargas de mayor a menor.
+
+![Opcion7-top-10-libros-mas-descargados](./multimedia/UsarProyecto/Opcion7.png)
+
+Y al ingresar la opción 8 muestra un mensaje diciendo "Escribe el nombre del autor que deseas buscar:", el nombre puede ser nombre completo o sólo una parte. Después realiza una búsqueda en la base de datos con el nombre ingresado y lo muestra con sus respectivos datos y los libros de dicho autor.
+
+![Opcion8-buscar-autor-por-nombre](./multimedia/UsarProyecto/Opcion8.png)
 
 # Acceso al proyecto
 
-En desarrollo.
+Para poder usar el proyecto revisar las siguientes dos opciones.
+
+Si no tienes instalado Git realiza lo siguiente:
+
+- Das click en Code, luego click en Download ZIP y se descarga automáticamente el proyecto.
+
+![Descargar-Proyecto](./multimedia/AccesoProyecto/DescargarProyecto.png)
+
+- Arrastra el .ZIP al IDE donde tienes los proyectos realizados (en Apache NetBeans, InelliJ IDEA, etc.).
+- Seleccionas el proyecto y le das click en extract here o extraer aquí. Y al final eliminas el .ZIP.
+
+![Descomprimir-Proyecto](./multimedia/AccesoProyecto/DescomprimirZIP.png)
+
+Si tienes instalado Git realiza lo siguiente:
+
+- Das click en Code, luego click en donde están los dos cuadros y se copia en tu portapapeles la url.
+
+![Copiar-Repositorio](./multimedia/AccesoProyecto/CopiarRepositorio.png)
+
+- Abres la terminal Git Bash, introduce `git clone` y la ruta (con las diagonales invertidas) donde se clonará el repositorio junto con el proyecto, pegas la url copiada, le das enter y se clona todo.
+
+Para abrir el proyecto en IntelliJ IDEA realiza lo siguiente:
+
+- Abrir IntelliJ IDEA y das click en Open o Abrir
+![Menu-Proyectos](./multimedia/AccesoProyecto/MenuProyectos.png)
+
+- Seleccionar el proyecto, das click en el botón azul OK y se abre.
+- Y para arrancar el programa solo le das click en la flecha verde hasta arriba y listo.
+![Arrancar-Proyecto](./multimedia/AccesoProyecto/ArrancarProyecto.png)
 
 # Teconologías utilizadas
 
-- Java 21
+- Java 17
 - Hibernate
 - Spring Boot
 - Maven

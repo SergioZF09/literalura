@@ -31,7 +31,7 @@ public class Principal {
 
             try {
                 String menu = """
-                ------------
+                --------------
                 **Catálogo de libros en Literalura**
                 1.- Buscar libro por título
                 2.- Listar libros registrados
@@ -42,6 +42,7 @@ public class Principal {
                 7.- Top 10 libros más descargados
                 8.- Buscar autor por nombre
                 0.- Salir
+                --------------
                 
                 Elija la opción a través de su número:""";
 
@@ -114,7 +115,7 @@ public class Principal {
             //Busca si el libro se encuentra en la API
             if (datos.listaLibros().isEmpty()){
                 //Si no se encuentra dicho libro, muestra el siguiente mensaje
-                System.out.println(" No se encontró el libro buscado.");
+                System.out.println("No se encontró el libro buscado en Gutendex API.");
             } else {
                 //Si se encuentra en la API, obtiene cada dato del libro buscado con el autor o autores
                 // y se guardan en su respectivo record. Y el idioma se transforma en cadena
@@ -171,6 +172,7 @@ public class Principal {
             //Si no existen libros registrados, muestra el siguiente mensaje
             System.out.println("No se encontraron libros registrados.");
         } else {
+            System.out.println("Los libros registrados son los siguientes:\n");
             //Si existen libros, los muestra ordenados alfabéticamente por título
             libros.stream()
                     .sorted(Comparator.comparing(Libro::getTitulo))
@@ -191,6 +193,7 @@ public class Principal {
             System.out.println("No se encontraron autores registrados.");
         } else {
             //Si existen autores, los muestra en un forEach
+            System.out.println("Los autores registrados son los siguientes:\n");
             for (Autor autor : autores) {
                 //Busca en la base de datos los libros del autor por id de dicho autor
                 List<Libro> librosPorAutorId = libroServicio.buscarLibrosPorAutorId(autor.getId());
@@ -211,7 +214,7 @@ public class Principal {
                             .map(Libro::getTitulo)
                                     .collect(Collectors.joining(", "));
                     System.out.println("Libros: ["+librosRegistrados+"]");
-                    System.out.println("-------------------\n");
+                    System.out.println("-----------------\n");
                 }//Finaliza segundo if
             }//Finaliza bucle for
         }//Finaliza primer if
@@ -221,7 +224,7 @@ public class Principal {
     //Metodo para buscar los autores vivos por el año determinado
     private void buscarAutoresVivosPorAnio() {
 
-        System.out.print("Escribe el año vivo de autor(es) que desea buscar: ");
+        System.out.print("Escribe el año vivo del autor(es) que desea buscar: ");
         var anioDelAutor = teclado.nextInt();
 
         //Busca en la base de datos el autor o autores que estaban vivos por su año
@@ -232,6 +235,7 @@ public class Principal {
             //Si no existen dichos autores, muestra el siguiente mensaje
             System.out.println("No se encontraron autores vivos por el año buscado.");
         } else {
+            System.out.printf("El autor o los autores vivos del año %d son los siguientes:\n", anioDelAutor);
             //Si existen dichos autores, los muestra en un forEach y hace mismo proceso que el metodo pasado
             for (Autor autoresVivos : buscarAutoresPorAnio) {
                 List<Libro> librosAutoresVivosPorId = libroServicio.buscarLibrosPorAutorId(autoresVivos.getId());
@@ -248,7 +252,7 @@ public class Principal {
                             .map(Libro::getTitulo)
                             .collect(Collectors.joining(", "));
                     System.out.println("Libros: ["+librosRegistrados+"]");
-                    System.out.println("-------------------\n");
+                    System.out.println("-----------------\n");
                 }//Finaliza segundo if
             }//Finaliza bucle for
         }//Finaliza primer if
@@ -279,6 +283,7 @@ public class Principal {
                 //Si no existen dichos libros, muestra el siguiente mensaje
                 System.out.println("No se encontraron los libros del idioma buscado.");
             } else {
+                System.out.printf("Los libros del idioma '%s' son los siguientes:\n", nombreIdioma);
                 //Si existen dichos libros, los muestra en un forEach
                 buscarLibrosPorIdioma.forEach(l -> System.out.print(l.toString()));
             }//Finaliza if
@@ -301,9 +306,9 @@ public class Principal {
         } else {
             //Si existen libros, muestra las estadísticas de dichos libros
             System.out.println("Estadísticas de los libros por número de descargas:\n");
-            IntSummaryStatistics est = todosLosLibros.stream()
+            DoubleSummaryStatistics est = todosLosLibros.stream()
                     .filter(libro -> libro.getNumeroDescargas() > 0)
-                    .collect(Collectors.summarizingInt(Libro::getNumeroDescargas));
+                    .collect(Collectors.summarizingDouble(Libro::getNumeroDescargas));
             System.out.println("Cantidad media de descargas: " + est.getAverage());
             System.out.println("Cantidad máxima de descargas: "+ est.getMax());
             System.out.println("Cantidad mínima de descargas: " + est.getMin());
@@ -344,7 +349,7 @@ public class Principal {
             System.out.println("No se encontraron autores registrados.");
         } else {
             //Si está registrado, muestra la información del autor buscado
-            System.out.println("Autor encontrado:\n");
+            System.out.printf("El autor encontrado de nombre '%s' es el siguiente:\n", nombreAutor);
             for (Autor autor : autorBuscado) {
                 //Busca en la base de datos los libros del autor por id de dicho autor
                 List<Libro> librosPorAutorId = libroServicio.buscarLibrosPorAutorId(autor.getId());
@@ -365,7 +370,7 @@ public class Principal {
                             .map(Libro::getTitulo)
                             .collect(Collectors.joining(", "));
                     System.out.println("Libros: ["+librosRegistrados+"]");
-                    System.out.println("-------------------\n");
+                    System.out.println("-----------------\n");
                 }//Finaliza segundo if
             }//Finaliza bucle for
         }//Finaliza primer if

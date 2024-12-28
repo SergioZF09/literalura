@@ -1,6 +1,6 @@
 <h1>:books: Literalura :books:</h1>
 
-![Vídeo-aplicacion-Literalura](./multimedia/UsarProyecto/Literalura.mp4)
+
 
 # Insignias
 

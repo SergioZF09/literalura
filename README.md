@@ -44,18 +44,21 @@ Es una aplicación en consola donde muestra información de los libros y autores
 ## Funcionalidades del proyecto
 
 - `Funcionalidad 1`: Tiene una conexión con la API de la página Gutendex para obtener la información de libros y autores de dichos libros.
-- `Funcionalidad 2`: Contiene seis opciones para realizar consultas de información de la API, las cuales son:
+- `Funcionalidad 2`: Contiene nueve opciones para realizar consultas de información de la API y a la base de datos, las cuales son:
     - Buscar un libro por título
     - Listar libros registrados
     - Listar autores registrados
     - Listar autores vivos en un determinado año
     - Listar libros por idioma
+    - Estadísticas de libros por número de descargas
+    - Top 10 libros más descargados
+    - Buscar autor por nombre
     - Salir (Se cierra la aplicación)
 - `Funcionalidad 3`: En la primera opción realiza una búsqueda introduciendo el título de un libro (ya sea todo completo o una parte). Muestra la información del primer libro encontrado y se guarda en la base de datos, incluyendo la información del autor de dicho libro buscado.
-- `Funcionalidad 4`: En la segunda opción muestra informaciones (título, autor/es, primer idioma y número de descargas) de todos los libro registrados.
-- `Funcionalidad 5`: En la tercera opción muestra informaciones (nombre, feca de nacimiento y fecha de fallecido) de todos los autores junto con sus libros registrados.
+- `Funcionalidad 4`: En la segunda opción muestra informaciones (título, autor/es, primer idioma y número de descargas) de todos los libros registrados.
+- `Funcionalidad 5`: En la tercera opción muestra informaciones (nombre, fecha de nacimiento y fecha de fallecido) de todos los autores junto con sus libros registrados.
 - `Funcionalidad 6`: En la cuarta opción realiza una búsqueda de los autores que estaban vivos por un determinado año. Por ejemplo, si introduce el año 1600, muestra los autores vivos de ese año para atrás y los autores que fallecieron de ese año para adelante.
-- `Funcionalidad 7`: En la quinta opción muestra información de todos los libros por idioma. Muestra una lista con los idiomas de libros disponibles, solo es introducir el idioma abreviado y muestra el libro o los libros del idioma buscado.
+- `Funcionalidad 7`: En la quinta opción muestra información de uno o varios libros por idioma. Muestra una lista con los idiomas de libros disponibles, solo es introducir el idioma abreviado y muestra el libro o los libros del idioma buscado.
 - `Funcionalidad 8`: En la sexta opción muestra estadísticas de todos los libros por el número de descargas. Muestra la cantidad media, máxima y mínima de número de descargas de todos los libros registrados en la base de datos.
 - `Funcionalidad 9`: En la séptima opción muestra un top de 10 libros con más números de descargas. Los libros son tomados de la base de datos.
 - `Funcionalidad 10`: En la octava opción realiza una búsqueda de un autor introduciendo su nombre (ya sea todo completo o una parte). Muestra la información del autor encontrado junto con los títulos de los libros de dicho autor.

@@ -33,7 +33,8 @@
 # Descripción del proyecto
 
 ¡Bienvenido/a a LiterAlura!
-Es una aplicación en consola donde muestra información de los libros y autores que contiene la API Gutendex. En esta aplicación tiene diversas operaciones como: buscar un libro por el título y se registra la información de dicho libro y la información de su autor en la base de datos, listar los libros registrados, listar los autores registrados, listar autores vivos en un determinado año y listar los libros por el idioma.
+Es una aplicación en consola donde muestra información de los libros y autores que contiene la API Gutendex. En esta aplicación tiene diversas opciones como: buscar un libro por el título y se registra la información de dicho libro y la información de su autor en la base de datos, listar los libros registrados, listar los autores registrados, listar autores vivos en un determinado año y listar los libros por el idioma.
+También, cuenta con tres opciones extras como lo son: mostrar las estadísticas de los libros por el número de descargas, mostrar los 10 libros con más descargas y buscar un autor por su nombre.
 
 # Estado del proyecto
 

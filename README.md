@@ -3,11 +3,11 @@
 # Insignias
 
 <div align="center">
-    <img src="https://img.shields.io/badge/Estado-Concluido">
+    <img src="https://img.shields.io/badge/Estado-Concluido-green">
     <img src="https://img.shields.io/badge/Java-v17-blue">
     <img src="https://img.shields.io/badge/Base de Datos-PostreSQL-blue">
     <img src="https://img.shields.io/badge/Framework-Spring Boot-blue">
-    <img src="https://img.shields.io/badge/version-v1.0.0-green">
+    <img src="https://img.shields.io/badge/Versión-v1.0.0-green">
 </div>
 
 # Índice
